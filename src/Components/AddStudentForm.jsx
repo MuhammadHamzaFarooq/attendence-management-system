@@ -17,6 +17,7 @@ const AddStudenthtmlForm = () => {
       Course: course,
       RollNo: rollNo,
       Batch: batch,
+      Semester: semester
     };
 
     setStudent(studentObj)
