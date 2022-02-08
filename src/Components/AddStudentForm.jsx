@@ -1,41 +1,47 @@
-import React, { useState } from "react";
-import MarkAttendence from "./MarkAttendence";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const AddStudenthtmlForm = () => {
-  const [Name, setName] = useState("");
-  const [course, setCourse] = useState("");
-  const [semester, setSemester] = useState("");
-  const [rollNo, setRollNo] = useState("");
-  const [batch, setBatch] = useState("");
-  const [student, setStudent] = useState({});
+  let [name, setName] = useState("");
+  let [rollNo, setRollNo] = useState("");
+  let [course, setCourse] = useState("");
+  let [semester, setSemester] = useState("");
+  let [batch, setBatch] = useState("");
+
 
   const submitValue = (e) => {
     e.preventDefault();
     const studentObj = {
-      Name: Name,
+      Name: name,
       Course: course,
       RollNo: rollNo,
       Batch: batch,
       Semester: semester,
     };
 
-    // console.log(studentObj);
-    setStudent(studentObj);
+    if (
+      name !== "" &&
+      rollNo !== "" &&
+      course !== "" &&
+      semester !== "" &&
+      batch !== ""
+    ) {
     
-    axios.post("https://attendence-management-backend.herokuapp.com/student",studentObj).then((res)=>{
-      console.log(res);
-    }).catch((e)=>{
-      console.log(e)
-    });
-
-    setName("");
-    setCourse("");
-    setSemester("");
-    setRollNo("");
-    setBatch("");
-
-    //  return(<MarkAttendence student={student} />)
+      axios.post("http://localhost:8000/student",studentObj).then((res)=>{
+        console.log(res.data);
+      })
+      .catch((e)=>{
+        console.log(e);
+      })
+      setName("");
+      setRollNo("");
+      setCourse("");
+      setBatch("");
+      setSemester("");
+      
+    } else {
+      alert("Please Fill All field!");
+    }
   };
 
   return (
@@ -61,6 +67,7 @@ const AddStudenthtmlForm = () => {
               className="form-control"
               id="inputStudentName"
               onChange={(e) => setName(e.target.value)}
+              value={name}
             />
           </div>
           <div className="col-md-6">
@@ -72,6 +79,7 @@ const AddStudenthtmlForm = () => {
               className="form-control"
               id="inputRollNo"
               onChange={(e) => setRollNo(e.target.value)}
+              value={rollNo}
             />
           </div>
           <div className="col-md-4">
@@ -84,7 +92,9 @@ const AddStudenthtmlForm = () => {
               value={course}
               onChange={(e) => setCourse(e.target.value)}
             >
-              <option selected>Choose Course</option>
+              <option value={""} disabled>
+                Choose Course
+              </option>
               <option value="AI">Artificial Inteligence</option>
               <option value="CB">ChatBot</option>
               <option value="BC">BlockChain</option>
@@ -103,7 +113,7 @@ const AddStudenthtmlForm = () => {
               value={semester}
               onChange={(e) => setSemester(e.target.value)}
             >
-              <option defaultValue="" selected>
+              <option value={""} disabled>
                 Choose Semester
               </option>
               <option value="one">First Semester</option>
@@ -126,7 +136,7 @@ const AddStudenthtmlForm = () => {
               value={batch}
               onChange={(e) => setBatch(e.target.value)}
             >
-              <option defaultValue="" selected>
+              <option value={""} disabled>
                 Choose Batch
               </option>
               <option value="B1">Batch 01</option>
@@ -155,7 +165,6 @@ const AddStudenthtmlForm = () => {
           </div>
         </form>
       </div>
-      <MarkAttendence student={student} />
     </>
   );
 };
