@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const AddStudenthtmlForm = () => {
@@ -27,7 +27,7 @@ const AddStudenthtmlForm = () => {
       batch !== ""
     ) {
     
-      axios.post("http://localhost:8000/student",studentObj).then((res)=>{
+      axios.post("https://attendence-management-backend.herokuapp.com/student",studentObj).then((res)=>{
         console.log(res.data);
       })
       .catch((e)=>{

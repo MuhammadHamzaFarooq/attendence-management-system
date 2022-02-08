@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -27,7 +27,7 @@ const MarkAttendence = ({ students }) => {
       }}
     >
       <h1 style={{ padding: "20px 0px" }}>Mark Attendence 8-02-2022</h1>
-      <table className="table" style={{ width: "80%" }}>
+      <table className="table" style={{ width: "93%" }}>
         <thead>
           <tr>
             <th scope="col">Sr.no</th>
