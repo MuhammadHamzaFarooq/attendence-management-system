@@ -137,6 +137,7 @@ const MarkAttendence = ({ students }) => {
                         id: data._id,
                         attendence: AttendenceStatus,
                         date: Date,
+                        name: data.name
                       };
                       if (
                         data._id !== "" &&
