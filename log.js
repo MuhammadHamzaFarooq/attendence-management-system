@@ -1,2 +1,4 @@
-console.log("Attendence Management System");
+console.log("=========== Attendence Management System ===========");
+
+
 
